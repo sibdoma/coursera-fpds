@@ -1,4 +1,4 @@
-package week1.json
+package main.scala.json
 
 abstract class JSON
 

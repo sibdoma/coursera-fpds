@@ -1,4 +1,4 @@
-package week1.json
+package main.scala.json
 
 object Main extends App {
   val data = JObj(Map(
@@ -31,6 +31,16 @@ object Main extends App {
     case JNull => "null"
   }
 
-  print(show(data))
+  println(show(data))
+
+  val l: List[JObj] = List(data)
+  val res: List[(JSON, JSON)] = for {
+    JObj(bindings) <- l
+    JSeq(phones) = bindings("phoneNumbers")
+    JObj(phone) <- phones
+    JStr(number) = phone("number")
+    if number.startsWith("212")
+  } yield (bindings("firstName"), bindings("lastName"))
+  println(res)
 
 }
